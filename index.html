@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>jQuery rangeSelector by mouts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">jQuery rangeSelector</h1>
+      <h2 class="project-tagline">The jQuery rangeSelector plugin provides a simple way to make a range selection on DOM elements</h2>
+      <a href="https://github.com/mouts/jQuery-rangeSelector" class="btn">View on GitHub</a>
+      <a href="https://github.com/mouts/jQuery-rangeSelector/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/mouts/jQuery-rangeSelector/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="jqueryrangeselector" class="anchor" href="#jqueryrangeselector" aria-hidden="true"><span class="octicon octicon-link"></span></a>jquery.rangeSelector</h1>
+
+<p>The jQuery rangeSelector plugin provides a simple way to make a range selection on DOM elements.</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>Download the jquery.rangeSelector.js file and include it after the jQuery library.</p>
+
+<div class="highlight highlight-html"><pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>http://code.jquery.com/jquery-1.11.3.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;
+&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>/path/to/jquery.rangeSelector.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</pre></div>
+
+<h2>
+<a id="demo" class="anchor" href="#demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h2>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<h3>
+<a id="basic-usage" class="anchor" href="#basic-usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Basic usage</h3>
+
+<div class="highlight highlight-html"><pre><span class="pl-s1">&lt;<span class="pl-ent">style</span>&gt;</span>
+<span class="pl-s1">    <span class="pl-e">#selectable</span> <span class="pl-e">.selected</span> { <span class="pl-c1"><span class="pl-c1">color</span></span>: <span class="pl-c1">red</span>; }</span>
+<span class="pl-s1">&lt;/<span class="pl-ent">style</span>&gt;</span>
+&lt;<span class="pl-ent">ul</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>selectable<span class="pl-pds">"</span></span>&gt;  
+    &lt;<span class="pl-ent">li</span>&gt;&lt;/<span class="pl-ent">li</span>&gt;
+    &lt;<span class="pl-ent">li</span>&gt;&lt;/<span class="pl-ent">li</span>&gt;
+    ...
+&lt;/<span class="pl-ent">ul</span>&gt;</pre></div>
+
+<div class="highlight highlight-js"><pre>$(<span class="pl-s"><span class="pl-pds">'</span>#selectable<span class="pl-pds">'</span></span>).<span class="pl-c1">rangeSelector</span>();  </pre></div>
+
+<p>Click on the list items to make the range selection. By default, the class 'selected' is applied on each elements of the selection.</p>
+
+<h3>
+<a id="advanced-usage" class="anchor" href="#advanced-usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Advanced usage</h3>
+
+<p>Configure the plugin for your needs :</p>
+
+<ul>
+<li>apply another class name on the selected elements</li>
+<li>define exactly which elements are selectable</li>
+<li>define callbacks on the selector events</li>
+<li>use directly the selector instance</li>
+</ul>
+
+<div class="highlight highlight-html"><pre>&lt;<span class="pl-ent">ul</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>selectable<span class="pl-pds">"</span></span>&gt;  
+    &lt;<span class="pl-ent">li</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>disabled<span class="pl-pds">"</span></span>&gt;
+        &lt;<span class="pl-ent">span</span>&gt;&lt;/<span class="pl-ent">span</span>&gt;
+    &lt;/<span class="pl-ent">li</span>&gt;
+    &lt;<span class="pl-ent">li</span>&gt;
+        &lt;<span class="pl-ent">span</span>&gt;&lt;/<span class="pl-ent">span</span>&gt;
+    &lt;/<span class="pl-ent">li</span>&gt;
+    ...
+&lt;/<span class="pl-ent">ul</span>&gt;</pre></div>
+
+<div class="highlight highlight-js"><pre><span class="pl-k">var</span> selector <span class="pl-k">=</span> $(<span class="pl-s"><span class="pl-pds">'</span>#selectable<span class="pl-pds">'</span></span>).<span class="pl-c1">rangeSelector</span>({
+    getInstance<span class="pl-k">:</span> <span class="pl-c1">true</span>,
+    filterItems<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>li:not(.disabled) &gt; span<span class="pl-pds">'</span></span>,
+    selectedClass<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>checked<span class="pl-pds">'</span></span>,
+    <span class="pl-c">// using callback when a new selection starts</span>
+    <span class="pl-en">onSelectionStart</span><span class="pl-k">:</span> <span class="pl-k">function</span>(<span class="pl-smi">element</span>) { 
+        <span class="pl-en">console</span><span class="pl-c1">.log</span>(<span class="pl-s"><span class="pl-pds">'</span>selection started<span class="pl-pds">'</span></span>); 
+    },
+});
+
+<span class="pl-c">// cancel the selection</span>
+selector.<span class="pl-c1">cancelSelection</span>(); 
+
+<span class="pl-c">// set a new selection</span>
+selector.<span class="pl-c1">setSelection</span>(selector.<span class="pl-c1">items</span>.<span class="pl-c1">first</span>(), selector.<span class="pl-c1">items</span>.<span class="pl-c1">last</span>());
+
+<span class="pl-c">// get selector options</span>
+<span class="pl-k">var</span> options <span class="pl-k">=</span> selector.<span class="pl-c1">getOptions</span>();
+
+<span class="pl-c">// initialize the selector with new options</span>
+selector.<span class="pl-c1">setOptions</span>(options);</pre></div>
+
+<h3>
+<a id="default-configuration" class="anchor" href="#default-configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Default configuration</h3>
+
+<div class="highlight highlight-js"><pre>$(<span class="pl-s"><span class="pl-pds">'</span>#selectable<span class="pl-pds">'</span></span>).<span class="pl-c1">rangeSelector</span>({
+    getInstance<span class="pl-k">:</span> <span class="pl-c1">false</span>,
+    filterItems<span class="pl-k">:</span> <span class="pl-c1">false</span>,
+    selectedClass<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>selected<span class="pl-pds">'</span></span>,
+    <span class="pl-en">onSelectionStart</span><span class="pl-k">:</span> <span class="pl-k">function</span>(<span class="pl-smi">element</span>) { <span class="pl-k">return</span> <span class="pl-c1">true</span>; },
+    <span class="pl-en">onSelectionChange</span><span class="pl-k">:</span> <span class="pl-k">function</span>(<span class="pl-smi">selection</span>) { <span class="pl-k">return</span> <span class="pl-c1">true</span>; },
+    <span class="pl-en">onSelectionEnd</span><span class="pl-k">:</span> <span class="pl-k">function</span>(<span class="pl-smi">selection</span>) { <span class="pl-k">return</span> <span class="pl-c1">true</span>; },
+    <span class="pl-en">onSelectionSet</span><span class="pl-k">:</span> <span class="pl-k">function</span>(<span class="pl-smi">selection</span>) { <span class="pl-k">return</span> <span class="pl-c1">true</span>; },
+    <span class="pl-en">onCancelSelection</span><span class="pl-k">:</span> <span class="pl-k">function</span>() { <span class="pl-k">return</span> <span class="pl-c1">true</span>; }
+});</pre></div>
+
+<h2>
+<a id="licence" class="anchor" href="#licence" aria-hidden="true"><span class="octicon octicon-link"></span></a>Licence</h2>
+
+<p>jQuery rangeSelector is open-sourced software licensed under the <a href="http://opensource.org/licenses/MIT">MIT license</a></p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/mouts/jQuery-rangeSelector">jQuery rangeSelector</a> is maintained by <a href="https://github.com/mouts">mouts</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
