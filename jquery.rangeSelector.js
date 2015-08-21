@@ -1,3 +1,9 @@
+/*!
+ * rangeSelector beta version
+ * https://github.com/mouts/jquery.rangeSelector
+ * 
+ * Released under the MIT license
+ */
 (function($)
 {
     $.rangeSelector = function(element, options) {
