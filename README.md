@@ -9,9 +9,6 @@ Download the jquery.rangeSelector.js file and include it after the jQuery librar
 <script src="/path/to/jquery.rangeSelector.js"></script>
 ```
 
-## Demo
-
-
 ## Usage
 
 ### Basic usage
