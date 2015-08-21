@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jquery.rangeSelector sample</title>
+</head>
+<body>
+
+    <table id="table-sample">
+        <thead>
+            <tr>
+                <th>S</th>
+                <th>M</th>
+                <th>T</th>
+                <th>W</th>
+                <th>T</th>
+                <th>F</th>
+                <th>S</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="disabled">-</td>
+                <td class="disabled">-</td>
+                <td class="disabled">-</td>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+                <td>10</td>
+                <td>11</td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>13</td>
+                <td>14</td>
+                <td>15</td>
+                <td>16</td>
+                <td>17</td>
+                <td>18</td>
+            </tr>
+            <tr>
+                <td>19</td>
+                <td>20</td>
+                <td>21</td>
+                <td>22</td>
+                <td>23</td>
+                <td>24</td>
+                <td>25</td>
+            </tr>
+            <tr>
+                <td>26</td>
+                <td>27</td>
+                <td>28</td>
+                <td>29</td>
+                <td>30</td>
+                <td class="disabled">-</td>
+                <td class="disabled">-</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div id="controls">
+        <select name="start">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+            <option value="25">25</option>
+            <option value="26">26</option>
+            <option value="27">27</option>
+            <option value="28">28</option>
+            <option value="29">29</option>
+            <option value="30">30</option>
+        </select>
+        <select name="end">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+            <option value="25">25</option>
+            <option value="26">26</option>
+            <option value="27">27</option>
+            <option value="28">28</option>
+            <option value="29">29</option>
+            <option value="30">30</option>
+        </select>
+        <button id="set-selection">set selection</button>
+        <button id="cancel-selection">cancel selection</button>
+    </div>
+
+    <div id="logs">
+
+    </div>
+
+    <style>
+        body {
+            padding: 20px;
+        }
+
+        #table-sample {
+            width: 100%;
+            table-layout: fixed;
+            border-collapse: collapse;
+        }
+        #table-sample th,
+        #table-sample td {
+            border: 1px solid #bcbcbc;
+            text-align: center;
+        }
+        #table-sample td.disabled {
+            color: #bcbcbc;
+        }
+        #table-sample td:not(.disabled):hover,
+        #table-sample td.selected {
+            cursor: pointer;
+            background-color: #e9e9e9;
+        }
+
+        #controls {
+            margin-top: 1em;
+            text-align: center;
+        }
+
+        #logs {
+            margin-top: 1em;
+            height: 22.5em;
+            overflow: auto;
+            border: 1px solid #bcbcbc;
+        }
+        #logs p {
+            margin: 0;
+        }
+    </style>
+    
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="jquery.rangeSelector.js"></script>
+    <script>
+        $(document).ready(function () {
+            var log = function (content) {
+                $('#logs').prepend($('<p>'+content+'</p>'));
+            };
+
+            var selector = $('#table-sample').rangeSelector({
+                getInstance: true,
+                filterItems: 'td:not(.disabled)',
+                onSelectionStart: function(element) {
+                    log('selection start at #'+ element.text());
+                },
+                onSelectionChange: function(selection) {
+                    log('selection change from #' + selection.eq(0).text() + ' to #' + selection.eq(-1).text());
+                },
+                onSelectionEnd: function(selection) {
+                    log('selection end from #' + selection.eq(0).text() + ' to #' + selection.eq(-1).text());
+                },
+                onSelectionSet: function(selection) {
+                    log('set selection from #' + selection.eq(0).text() + ' to #' + selection.eq(-1).text());
+                },
+                onCancelSelection: function(selection) {
+                    log('selection cancelled');
+                }
+            });
+
+            $('#set-selection').click(function() {
+                var start = $('select[name="start"]').val(),
+                    end = $('select[name="end"]').val();
+
+                selector.setSelection(selector.items.eq(start-1), selector.items.eq(end-1));
+            });
+
+            $('#cancel-selection').click(function() {
+                selector.cancelSelection();
+            });
+        });
+    </script>
+    
+</body>
+</html>
